@@ -1,0 +1,166 @@
+/* Global page styling */
+
+#particle-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 999; /* change to 999 if you want particles floating in front of boxes */
+}
+body {
+  font-family: Arial, sans-serif;
+  margin: 24px;
+  background-color: #070707;
+  color: #fcf9f9;
+  line-height: 1.5;
+
+}
+
+header{
+  background-image: url("background.gif");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: white;
+  text-align: center;
+  padding: 60px 20px;
+  border: 1px solid #0f0202;
+
+}
+
+
+h1 {
+  text-align: center;
+  font-family: 'Dancing Script', cursive;
+}
+
+h2, h3 {
+  color: #f7f7f8;
+  margin-top: 0;
+}
+
+img {
+  max-width: 320px;
+  height: auto;
+  border-radius: 6px;
+  margin: 6px 8px 6px 0;
+}
+
+.biodata-row {
+  display: flex;
+  align-items: flex-start; /* lines up the top of the text with the top of the photo */
+  gap: 24px;               /* space between the photo and the biodata */
+  margin-top: 10px;
+}
+
+#sylus1 {
+  width: 240px;            /* adjust photo width as you like */
+  height: auto;
+  border-radius: 8px;
+  flex-shrink: 0;          /* stops the image from shrinking */
+}
+
+.biodata-text p {
+  margin-top: 0;
+  font-weight: bold;
+}
+
+.biodata-text ul {
+  padding-left: 20px;
+  line-height: 1.6;
+}
+
+section {
+    background-image: url("sylusback.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #0f0505;
+    border: 1px solid #851313;
+    border-radius: 12px;
+    padding:20px 24px;
+    margin-top: 24px;
+}
+
+.sylus2 {
+    width: 240px;
+    height: auto;
+    border-radius: 8px;
+    flex-shrink: 0;
+    margin-left: auto;
+}
+
+.sylus3 {
+    width: 100%;
+  max-width: 300px;
+    height: auto;
+    border-radius: 8px;
+
+}
+
+.biodata-row2 {
+  background: linear-gradient(145deg, #140606, #0b0404);
+  border: 1px solid rgba(133, 19, 19, 0.75); /* softer crimson border instead of harsh white */
+  border-radius: 14px;
+  padding: 22px 24px;                        /* breathing room inside the box */
+  display: flex;
+  align-items: center;                       /* keeps the left & right sides balanced */
+  justify-content: space-between;
+  gap: 28px;
+  margin-top: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.55);
+}
+
+.biodata-row2 .biodata-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.biodata-row2 .biodata-text p {
+    text-align: center;
+  margin-bottom: 14px;
+  line-height: 1.6;
+}
+
+.biodata-row2 #sylus2,
+.biodata-row2 .sylus2 {
+    text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.65);
+  margin: 0;
+}
+
+.biodata-row2 .biodata-text h3 {
+    text-align: center;
+}
+
+.biodata-row .biodata-text p,
+.biodata-row2 .biodata-text p {
+  text-align: center;
+  font-family: 'Dancing Script', cursive;
+  font-size: 50px;
+}
+
+.vid {
+  background-color: #0f0505;
+  border: 1px solid #851313;
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin-top: 24px;
+}
+
+.video-box {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.video-box iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}

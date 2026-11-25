@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Character set and responsive viewport setup -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>I wonder what website is this</title>
+  <!-- Link external stylesheet -->
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
+
+  <style>
+    h2 {
+      border-left: 5px solid #3a0909;
+      padding-left: 10px;
+      color: #feffff;
+      font-family: 'Dancing Script', cursive;
+    }
+  </style>
+</head>
+
+<body>
+    <canvas id="particle-canvas"></canvas>
+  <header>
+    <h1>Welcome to my hiding spot :3 !!</h1>
+    <p>A place full of <strong>RANDOMNESS OWO</strong> !!</p>
+  </header>
+  <br>
+  <h2>Top 5 husbando list</h2>
+
+  <section class="husbando">
+    <div class="list">
+      <ol>
+        <li>
+          <h3>Sylus the mafia</h3>
+          <p>eh who else if it isnt the white haired villain from love and deepspace</p>
+          <div class="biodata-row">
+            <img id="sylus1" src="sylus.jpg" alt="sylus">
+            <div class="biodata-text">
+              <br>
+              <h3>Biodata</h3>
+              <ul>
+                <li><strong>Full Name:</strong> Sylus (Chinese: 秦彻 / Qin Che)</li>
+                <li><strong>Age</strong> 28</li>
+                <li><strong>Birthday:</strong> April 18</li>
+                <li><strong>Zodiac Sign:</strong> Aries</li>
+                <li><strong>Height:</strong> 6'2" (190 cm)</li>
+                <li><strong>Appearance:</strong> Silver/white hair, bright red eyes (right eye can glow red when using Evol), and a muscular build.</li>
+                <li><strong>Role / Occupation:</strong> Fruit Seller :'3</li>
+              </ul>
+            </div>
+          </div>
+          <br>
+          
+        
+
+    
+    
+        <div class="biodata-row2">
+            <div class="biodata-text">
+                <h3>Why him?</h3>
+                <p>"Of course my kitten going 
+                    <br>to pick me for this list~"</p>
+                    <p>- Sylus</p>
+                <!-- <img id="sylus3" src="sylus3.gif" alt="sylus3"> -->
+            </div>
+            <img id="sylus2" src="Sylus Meme.jpg" alt="sylus2">
+        </div>
+        </li>
+      </ol>
+    </div>
+    <br>
+    
+
+  </section>
+
+  <section class="vid">
+  <div class="video-box">
+    <iframe
+      src="https://www.youtube.com/embed/d2GgqdFVGpA"
+      title="Heartbeats Ablaze | Sylus Love and Deepspace"
+      referrerpolicy="strict-origin-when-cross-origin"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+    </iframe>
+  </div>
+</section>
+
+
+  </section>
+
+  <script>
+  const canvas = document.getElementById("particle-canvas");
+  const ctx = canvas.getContext("2d");
+
+  function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  resizeCanvas();
+  window.addEventListener("resize", resizeCanvas);
+
+  const particles = [];
+  const particleCount = 60; // increase or decrease how many particles appear
+  const colors = ["#ff3b3b", "#851313", "#ffffff"]; // crimson & white glow
+
+  for (let i = 0; i < particleCount; i++) {
+    particles.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      radius: Math.random() * 2.5 + 1,
+      speedX: (Math.random() - 0.5) * 0.6,
+      speedY: -(Math.random() * 0.8 + 0.2), // negative = floats upward; make positive to fall downward
+      color: colors[Math.floor(Math.random() * colors.length)],
+      alpha: Math.random() * 0.7 + 0.3
+    });
+  }
+
+  function animateParticles() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    for (const p of particles) {
+      p.x += p.speedX;
+      p.y += p.speedY;
+
+      // Wrap around screen edges
+      if (p.y < 0) p.y = canvas.height;
+      if (p.y > canvas.height) p.y = 0;
+      if (p.x < 0) p.x = canvas.width;
+      if (p.x > canvas.width) p.x = 0;
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+      ctx.fillStyle = p.color;
+      ctx.globalAlpha = p.alpha;
+      ctx.shadowBlur = 8;
+      ctx.shadowColor = p.color;
+      ctx.fill();
+    }
+
+    ctx.globalAlpha = 1;
+    requestAnimationFrame(animateParticles);
+  }
+
+  animateParticles();
+</script>
+</body>
+</html>
