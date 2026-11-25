@@ -164,3 +164,49 @@ section {
   height: 100%;
   border: 0;
 }
+
+/* Mobile / phone layout tweaks */
+@media (max-width: 768px) {
+  body {
+    margin: 12px;
+  }
+
+  header {
+    padding: 40px 14px;
+  }
+
+  section {
+    padding: 16px;
+    margin-top: 16px;
+  }
+
+  /* Stack left/right rows vertically on phones */
+  .biodata-row,
+  .biodata-row2 {
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    padding: 16px;
+  }
+
+  /* Make images fit comfortably inside narrow phone screens */
+  #sylus1,
+  #sylus2,
+  .sylus2,
+  .sylus3,
+  .biodata-text img {
+    width: 100%;
+    max-width: 280px;
+    margin-left: 0;
+  }
+
+  /* Keep biodata bullets readable on the left while centering paragraphs */
+  .biodata-text {
+    width: 100%;
+  }
+
+  .biodata-text ul {
+    text-align: left;
+    padding-left: 18px;
+  }
+}
