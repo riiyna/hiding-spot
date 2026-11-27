@@ -166,74 +166,138 @@ section {
 }
 
 .sylus-3d-section {
-  background-color: #0f0505;
-  border: 1px solid #851313;
-  border-radius: 12px;
-  padding: 24px;
-  margin-top: 24px;
-  text-align: center;
-}
-
-.card-3d-wrapper {
-  perspective: 1000px; /* creates the 3D depth space */
-  display: flex;
-  justify-content: center;
-  padding: 20px 0;
-}
-
-.card-3d {
   position: relative;
-  width: 340px;
-  height: 460px;
-  border-radius: 16px;
-  transform-style: preserve-3d; /* keeps layers in 3D space */
-  transition: transform 0.15s ease-out;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8), 0 0 20px rgba(133, 19, 19, 0.5);
-  border: 1px solid rgba(255, 75, 75, 0.35);
-  cursor: pointer;
+  width: 100%;
+  min-height: 480px;
+  border: 1px solid #851313;
+  border-radius: 14px;
+  margin-top: 24px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 40px 48px;
+  background-color: #0b0404;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.75);
 }
 
-/* Layer 0: Background */
-.layer-bg {
+/* Soft dark vignette so right-side text stays crisp */
+.sylus-3d-section::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(10, 4, 4, 0.1) 0%,
+    rgba(10, 4, 4, 0.45) 55%,
+    rgba(10, 4, 4, 0.82) 100%
+  );
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Layer 0: Wallpaper background */
+.wallpaper-bg {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  max-width: none; /* overrides global img max-width: 320px */
-  margin: 0;
-  object-fit: cover;
-  border-radius: 16px;
-  transform: translateZ(0px);
-}
-
-/* Layer 1: Sylus Cutout floating forward */
-.layer-fg {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  width: 95%;
   max-width: none;
   margin: 0;
-  height: auto;
-  /* -50% centers horizontally; translateZ(65px) pulls him forward into 3D */
-  transform: translateX(-50%) translateZ(65px);
-  filter: drop-shadow(0 16px 20px rgba(0, 0, 0, 0.85));
+  object-fit: cover;
+  transform: scale(1.08) translate3d(0, 0, 0);
+  transition: transform 0.18s ease-out;
+  z-index: 0;
   pointer-events: none;
 }
 
-/* Optional floating text in front */
-.layer-text {
+/* Layer 1: Sylus cutout */
+.wallpaper-fg {
   position: absolute;
-  bottom: 18px;
-  left: 0;
-  right: 0;
-  font-family: 'Dancing Script', cursive;
-  font-size: 2rem;
-  font-weight: bold;
-  color: #ffffff;
-  text-shadow: 0 0 12px #ff2a2a, 0 2px 8px #000000;
-  transform: translateZ(90px);
+  bottom: 0;
+  left: 6%;
+  height: 94%;
+  width: auto;
+  max-width: none;
+  margin: 0;
+  object-fit: contain;
+  transform: scale(1.04) translate3d(0, 0, 0);
+  transition: transform 0.14s ease-out;
+  filter: drop-shadow(0 16px 28px rgba(0, 0, 0, 0.9));
+  z-index: 1;
   pointer-events: none;
+}
+
+/* Floating words on the right */
+.wallpaper-words {
+  position: relative;
+  z-index: 3;
+  max-width: 420px;
+  text-align: right;
+  transition: transform 0.12s ease-out;
+  animation: gentleFloat 4s ease-in-out infinite;
+}
+
+.float-tag {
+  display: inline-block;
+  font-size: 0.75rem;
+  letter-spacing: 3px;
+  color: #ff5c5c;
+  margin-bottom: 6px;
+}
+
+.float-title {
+  font-family: 'Dancing Script', cursive;
+  font-size: 3.4rem;
+  line-height: 1.05;
+  color: #ffffff;
+  text-shadow: 0 0 18px rgba(255, 42, 42, 0.65), 0 4px 12px rgba(0, 0, 0, 0.9);
+  margin: 0 0 10px 0;
+}
+
+.float-quote {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #f3e8e8;
+  margin: 0;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.95);
+}
+
+@keyframes gentleFloat {
+  0%, 100% {
+    margin-top: 0px;
+  }
+  50% {
+    margin-top: -10px;
+  }
+}
+
+/* Phone / mobile layout */
+@media (max-width: 768px) {
+  .sylus-3d-section {
+    min-height: 520px;
+    padding: 24px 20px;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .wallpaper-fg {
+    left: 50%;
+    height: 62%;
+    transform: translateX(-50%) scale(1.04);
+  }
+
+  .wallpaper-words {
+    max-width: 100%;
+    text-align: center;
+    background: rgba(12, 4, 4, 0.72);
+    padding: 14px 18px;
+    border-radius: 12px;
+  }
+
+  .float-title {
+    font-size: 2.5rem;
+  }
 }
 
 /* Mobile sizing */
