@@ -91,6 +91,20 @@
 
   </section>
 
+  <section class="sylus-3d-section">
+  <h2>Sylus 3D Showcase</h2>
+  <div class="card-3d-wrapper">
+    <div class="card-3d" id="sylusCard">
+      <!-- Layer 0: Background -->
+      <img src="sylus-bg.jpg" alt="Background" class="layer-bg">
+      <!-- Layer 1: Transparent PNG cutout floating in front -->
+      <img src="sylus-cutout.png" alt="Sylus Cutout" class="layer-fg">
+      <!-- Optional floating title/badge -->
+      <div class="layer-text">SYLUS</div>
+    </div>
+  </div>
+</section>
+
   <script>
   const canvas = document.getElementById("particle-canvas");
   const ctx = canvas.getContext("2d");
@@ -146,19 +160,29 @@
 
   animateParticles();
 </script>
+  <script>
+  const card = document.getElementById("sylusCard");
 
-  <section class="sylus-3d-section">
-  <h2>Sylus 3D Showcase</h2>
-  <div class="card-3d-wrapper">
-    <div class="card-3d" id="sylusCard">
-      <!-- Layer 0: Background -->
-      <img src="sylus-bg.jpg" alt="Background" class="layer-bg">
-      <!-- Layer 1: Transparent PNG cutout floating in front -->
-      <img src="sylus-cutout.png" alt="Sylus Cutout" class="layer-fg">
-      <!-- Optional floating title/badge -->
-      <div class="layer-text">SYLUS</div>
-    </div>
-  </div>
-</section>
+  card.addEventListener("mousemove", (e) => {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left; // mouse X inside card
+    const y = e.clientY - rect.top;  // mouse Y inside card
+
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+
+    // Max tilt angle (18 degrees)
+    const rotateX = ((y - centerY) / centerY) * -18;
+    const rotateY = ((x - centerX) / centerX) * 18;
+
+    card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+  });
+
+  card.addEventListener("mouseleave", () => {
+    card.style.transform = "rotateX(0deg) rotateY(0deg)";
+  });
+</script>
+
+  
 </body>
 </html>
