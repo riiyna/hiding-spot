@@ -22,11 +22,13 @@
 </head>
 
 <body>
-    <canvas id="particle-canvas"></canvas>
+  <canvas id="particle-canvas"></canvas>
+
   <header>
     <h1>Welcome to my hiding spot :3 !!</h1>
     <p>A place full of <strong>RANDOMNESS OWO</strong> !!</p>
   </header>
+
   <br>
   <h2>Top 5 husbando list</h2>
 
@@ -36,14 +38,14 @@
         <li>
           <h3>Sylus the mafia</h3>
           <p>eh who else if it isnt the white haired villain from love and deepspace</p>
+
           <div class="biodata-row">
             <img id="sylus1" src="sylus.jpg" alt="sylus">
             <div class="biodata-text">
-              <br>
               <h3>Biodata</h3>
               <ul>
                 <li><strong>Full Name:</strong> Sylus (Chinese: 秦彻 / Qin Che)</li>
-                <li><strong>Age</strong> 28</li>
+                <li><strong>Age:</strong> 28</li>
                 <li><strong>Birthday:</strong> April 18</li>
                 <li><strong>Zodiac Sign:</strong> Aries</li>
                 <li><strong>Height:</strong> 6'2" (190 cm)</li>
@@ -52,134 +54,133 @@
               </ul>
             </div>
           </div>
-          <br>
-          
-        
 
-    
-    
-        <div class="biodata-row2">
+          <br>
+
+          <div class="biodata-row2">
             <div class="biodata-text">
-                <h3>Why him?</h3>
-                <p>"Of course my kitten going 
-                    <br>to pick me for this list~"</p>
-                    <p>- Sylus</p>
-                <!-- <img id="sylus3" src="sylus3.gif" alt="sylus3"> -->
+              <h3>Why him?</h3>
+              <p>"Of course my kitten going<br>to pick me for this list~"</p>
+              <p>- Sylus</p>
+              <!-- <img id="sylus3" src="sylus3.gif" alt="sylus3"> -->
             </div>
             <img id="sylus2" src="Sylus Meme.jpg" alt="sylus2">
-        </div>
+          </div>
         </li>
       </ol>
     </div>
-    <br>
-    
-
   </section>
 
   <section class="vid">
-  <div class="video-box">
-    <iframe
-      src="https://www.youtube.com/embed/d2GgqdFVGpA"
-      title="Heartbeats Ablaze | Sylus Love and Deepspace"
-      referrerpolicy="strict-origin-when-cross-origin"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      allowfullscreen>
-    </iframe>
-  </div>
-</section>
+    <div class="video-box">
+      <iframe
+        src="https://www.youtube.com/embed/d2GgqdFVGpA"
+        title="Heartbeats Ablaze | Sylus Love and Deepspace"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </div>
+  </section>
 
-
+  <!-- Layer 0: Background | Layer 1: Sylus Cutout | Layer 2: Right-side Words -->
   <section class="sylus-3d-section" id="sylusWallpaperStage">
-  <img src="sylus-bg.jpg" alt="Background" class="wallpaper-bg" id="wallpaperBg">
-  <img src="sylus-cutout.png" alt="Sylus" class="wallpaper-fg" id="wallpaperFg">
+    <img src="sylus-bg.jpg" alt="Background" class="wallpaper-bg layer-0" id="wallpaperBg">
+    <img src="sylus-cutout.png" alt="Sylus" class="wallpaper-fg layer-1" id="wallpaperFg">
 
-  <div class="wallpaper-words" id="wallpaperWords">
-    <span class="float-tag">HEARTBEATS ABLAZE</span>
-    <h2 class="float-title">Sylus</h2>
-    <p class="float-quote">“Taking the lead really is your specialty.”</p>
-  </div>
-</section>
-  
+    <div class="wallpaper-words layer-2" id="wallpaperWords">
+      <span class="float-tag">HEARTBEATS ABLAZE</span>
+      <h2 class="float-title">Sylus</h2>
+      <p class="float-quote">“Taking the lead really is your specialty.”</p>
+    </div>
+  </section>
+
   <script>
-  const canvas = document.getElementById("particle-canvas");
-  const ctx = canvas.getContext("2d");
+    const canvas = document.getElementById("particle-canvas");
+    const ctx = canvas.getContext("2d");
 
-  function resizeCanvas() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-  }
-  resizeCanvas();
-  window.addEventListener("resize", resizeCanvas);
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener("resize", resizeCanvas);
 
-  const particles = [];
-  const particleCount = 60; // increase or decrease how many particles appear
-  const colors = ["#ff3b3b", "#851313", "#ffffff"]; // crimson & white glow
+    const particles = [];
+    const particleCount = 60;
+    const colors = ["#ff3b3b", "#851313", "#ffffff"];
 
-  for (let i = 0; i < particleCount; i++) {
-    particles.push({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      radius: Math.random() * 2.5 + 1,
-      speedX: (Math.random() - 0.5) * 0.6,
-      speedY: -(Math.random() * 0.8 + 0.2), // negative = floats upward; make positive to fall downward
-      color: colors[Math.floor(Math.random() * colors.length)],
-      alpha: Math.random() * 0.7 + 0.3
-    });
-  }
-
-  function animateParticles() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    for (const p of particles) {
-      p.x += p.speedX;
-      p.y += p.speedY;
-
-      // Wrap around screen edges
-      if (p.y < 0) p.y = canvas.height;
-      if (p.y > canvas.height) p.y = 0;
-      if (p.x < 0) p.x = canvas.width;
-      if (p.x > canvas.width) p.x = 0;
-
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-      ctx.fillStyle = p.color;
-      ctx.globalAlpha = p.alpha;
-      ctx.shadowBlur = 8;
-      ctx.shadowColor = p.color;
-      ctx.fill();
+    for (let i = 0; i < particleCount; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        radius: Math.random() * 2.5 + 1,
+        speedX: (Math.random() - 0.5) * 0.6,
+        speedY: -(Math.random() * 0.8 + 0.2),
+        color: colors[Math.floor(Math.random() * colors.length)],
+        alpha: Math.random() * 0.7 + 0.3
+      });
     }
 
-    ctx.globalAlpha = 1;
-    requestAnimationFrame(animateParticles);
-  }
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  animateParticles();
-<script>
-  const stage = document.getElementById("sylusWallpaperStage");
-  const bgLayer = document.getElementById("wallpaperBg");
-  const fgLayer = document.getElementById("wallpaperFg");
-  const wordsLayer = document.getElementById("wallpaperWords");
+      for (const p of particles) {
+        p.x += p.speedX;
+        p.y += p.speedY;
 
-  if (stage && bgLayer && fgLayer && wordsLayer) {
-    stage.addEventListener("mousemove", (e) => {
-      const rect = stage.getBoundingClientRect();
-      // Normalized from -1 (left/top) to +1 (right/bottom)
-      const normX = ((e.clientX - rect.left) / rect.width) * 2 - 1;
-      const normY = ((e.clientY - rect.top) / rect.height) * 2 - 1;
+        if (p.y < 0) p.y = canvas.height;
+        if (p.y > canvas.height) p.y = 0;
+        if (p.x < 0) p.x = canvas.width;
+        if (p.x > canvas.width) p.x = 0;
 
-      bgLayer.style.transform = `scale(1.08) translate3d(${normX * -10}px, ${normY * -8}px, 0)`;
-      fgLayer.style.transform = `scale(1.04) translate3d(${normX * 18}px, ${normY * 12}px, 0)`;
-      wordsLayer.style.transform = `translate3d(${normX * -12}px, ${normY * -8}px, 0)`;
-    });
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = p.color;
+        ctx.globalAlpha = p.alpha;
+        ctx.shadowBlur = 8;
+        ctx.shadowColor = p.color;
+        ctx.fill();
+      }
 
-    stage.addEventListener("mouseleave", () => {
-      bgLayer.style.transform = "scale(1.08) translate3d(0, 0, 0)";
-      fgLayer.style.transform = "scale(1.04) translate3d(0, 0, 0)";
-      wordsLayer.style.transform = "translate3d(0, 0, 0)";
-    });
-  }
-</script>
+      ctx.globalAlpha = 1;
+      requestAnimationFrame(animateParticles);
+    }
 
-  
+    animateParticles();
+  </script>
+
+  <script>
+    const stage = document.getElementById("sylusWallpaperStage");
+    const bgLayer = document.getElementById("wallpaperBg");
+    const fgLayer = document.getElementById("wallpaperFg");
+    const wordsLayer = document.getElementById("wallpaperWords");
+
+    if (stage && bgLayer && fgLayer && wordsLayer) {
+      stage.addEventListener("mousemove", (e) => {
+        const rect = stage.getBoundingClientRect();
+        const normX = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+        const normY = ((e.clientY - rect.top) / rect.height) * 2 - 1;
+
+        // Layer 0: Background shifts gently
+        bgLayer.style.transform =
+          `scale(1.1) translate3d(${normX * -12}px, ${normY * -8}px, -40px)`;
+
+        // Layer 1: Sylus shifts more + subtle 3D depth angle
+        fgLayer.style.transform =
+          `scale(1.05) translate3d(${normX * 26}px, ${normY * 14}px, 45px) rotateY(${normX * 5}deg) rotateX(${normY * -3}deg)`;
+
+        // Layer 2: Right-side text sits on top layer with parallax
+        wordsLayer.style.transform =
+          `translate3d(${normX * -16}px, ${normY * -10}px, 85px)`;
+      });
+
+      stage.addEventListener("mouseleave", () => {
+        bgLayer.style.transform = "scale(1.1) translate3d(0, 0, -40px)";
+        fgLayer.style.transform = "scale(1.05) translate3d(0, 0, 45px) rotateY(0deg) rotateX(0deg)";
+        wordsLayer.style.transform = "translate3d(0, 0, 85px)";
+      });
+    }
+  </script>
 </body>
 </html>
