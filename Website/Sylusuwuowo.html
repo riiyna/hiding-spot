@@ -91,17 +91,18 @@
 
   </section>
 
-  <section class="sylus-3d-section">
-  <h2>Sylus 3D Showcase</h2>
-  <div class="card-3d-wrapper">
-    <div class="card-3d" id="sylusCard">
-      <!-- Layer 0: Background -->
-      <img src="sylus-bg.jpg" alt="Background" class="layer-bg">
-      <!-- Layer 1: Transparent PNG cutout floating in front -->
-      <img src="sylus-cutout.png" alt="Sylus Cutout" class="layer-fg">
-      <!-- Optional floating title/badge -->
-      <div class="layer-text">SYLUS</div>
-    </div>
+  <section class="sylus-3d-section" id="sylusWallpaperStage">
+  <!-- Layer 0: Big Background -->
+  <img src="sylus-bg.jpg" alt="Background" class="wallpaper-bg" id="wallpaperBg">
+
+  <!-- Layer 1: Sylus Cutout -->
+  <img src="sylus-cutout.png" alt="Sylus" class="wallpaper-fg" id="wallpaperFg">
+
+  <!-- Floating words on the right -->
+  <div class="wallpaper-words" id="wallpaperWords">
+    <span class="float-tag">HEARTBEATS ABLAZE</span>
+    <h2 class="float-title">Sylus</h2>
+    <p class="float-quote">“Taking the lead really is your specialty.”</p>
   </div>
 </section>
 
@@ -159,28 +160,30 @@
   }
 
   animateParticles();
-</script>
-  <script>
-  const card = document.getElementById("sylusCard");
+<script>
+  const stage = document.getElementById("sylusWallpaperStage");
+  const bgLayer = document.getElementById("wallpaperBg");
+  const fgLayer = document.getElementById("wallpaperFg");
+  const wordsLayer = document.getElementById("wallpaperWords");
 
-  card.addEventListener("mousemove", (e) => {
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left; // mouse X inside card
-    const y = e.clientY - rect.top;  // mouse Y inside card
+  if (stage && bgLayer && fgLayer && wordsLayer) {
+    stage.addEventListener("mousemove", (e) => {
+      const rect = stage.getBoundingClientRect();
+      // Normalized from -1 (left/top) to +1 (right/bottom)
+      const normX = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+      const normY = ((e.clientY - rect.top) / rect.height) * 2 - 1;
 
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
+      bgLayer.style.transform = `scale(1.08) translate3d(${normX * -10}px, ${normY * -8}px, 0)`;
+      fgLayer.style.transform = `scale(1.04) translate3d(${normX * 18}px, ${normY * 12}px, 0)`;
+      wordsLayer.style.transform = `translate3d(${normX * -12}px, ${normY * -8}px, 0)`;
+    });
 
-    // Max tilt angle (18 degrees)
-    const rotateX = ((y - centerY) / centerY) * -18;
-    const rotateY = ((x - centerX) / centerX) * 18;
-
-    card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-  });
-
-  card.addEventListener("mouseleave", () => {
-    card.style.transform = "rotateX(0deg) rotateY(0deg)";
-  });
+    stage.addEventListener("mouseleave", () => {
+      bgLayer.style.transform = "scale(1.08) translate3d(0, 0, 0)";
+      fgLayer.style.transform = "scale(1.04) translate3d(0, 0, 0)";
+      wordsLayer.style.transform = "translate3d(0, 0, 0)";
+    });
+  }
 </script>
 
   
