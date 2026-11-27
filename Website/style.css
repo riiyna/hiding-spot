@@ -165,6 +165,85 @@ section {
   border: 0;
 }
 
+.sylus-3d-section {
+  background-color: #0f0505;
+  border: 1px solid #851313;
+  border-radius: 12px;
+  padding: 24px;
+  margin-top: 24px;
+  text-align: center;
+}
+
+.card-3d-wrapper {
+  perspective: 1000px; /* creates the 3D depth space */
+  display: flex;
+  justify-content: center;
+  padding: 20px 0;
+}
+
+.card-3d {
+  position: relative;
+  width: 340px;
+  height: 460px;
+  border-radius: 16px;
+  transform-style: preserve-3d; /* keeps layers in 3D space */
+  transition: transform 0.15s ease-out;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8), 0 0 20px rgba(133, 19, 19, 0.5);
+  border: 1px solid rgba(255, 75, 75, 0.35);
+  cursor: pointer;
+}
+
+/* Layer 0: Background */
+.layer-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none; /* overrides global img max-width: 320px */
+  margin: 0;
+  object-fit: cover;
+  border-radius: 16px;
+  transform: translateZ(0px);
+}
+
+/* Layer 1: Sylus Cutout floating forward */
+.layer-fg {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 95%;
+  max-width: none;
+  margin: 0;
+  height: auto;
+  /* -50% centers horizontally; translateZ(65px) pulls him forward into 3D */
+  transform: translateX(-50%) translateZ(65px);
+  filter: drop-shadow(0 16px 20px rgba(0, 0, 0, 0.85));
+  pointer-events: none;
+}
+
+/* Optional floating text in front */
+.layer-text {
+  position: absolute;
+  bottom: 18px;
+  left: 0;
+  right: 0;
+  font-family: 'Dancing Script', cursive;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #ffffff;
+  text-shadow: 0 0 12px #ff2a2a, 0 2px 8px #000000;
+  transform: translateZ(90px);
+  pointer-events: none;
+}
+
+/* Mobile sizing */
+@media (max-width: 768px) {
+  .card-3d {
+    width: 280px;
+    height: 390px;
+  }
+}
+
 /* Mobile / phone layout tweaks */
 @media (max-width: 768px) {
   body {
