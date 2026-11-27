@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Character set and responsive viewport setup -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>I wonder what website is this</title>
-  <!-- Link external stylesheet -->
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=3">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
@@ -150,51 +148,50 @@
     animateParticles();
   </script>
 
-<script>
-  const stage = document.getElementById("sylusWallpaperStage");
-  const bgLayer = document.getElementById("wallpaperBg");
-  const fgLayer = document.getElementById("wallpaperFg");
-  const wordsLayer = document.getElementById("wallpaperWords");
+  <script>
+    const stage = document.getElementById("sylusWallpaperStage");
+    const bgLayer = document.getElementById("wallpaperBg");
+    const fgLayer = document.getElementById("wallpaperFg");
+    const wordsLayer = document.getElementById("wallpaperWords");
 
-  if (stage && bgLayer && fgLayer && wordsLayer) {
-    let targetX = 0;
-    let targetY = 0;
-    let currentX = 0;
-    let currentY = 0;
+    if (stage && bgLayer && fgLayer && wordsLayer) {
+      let targetX = 0;
+      let targetY = 0;
+      let currentX = 0;
+      let currentY = 0;
 
-    stage.addEventListener("mousemove", (e) => {
-      const rect = stage.getBoundingClientRect();
-      // -1 (left/top) to +1 (right/bottom)
-      targetX = ((e.clientX - rect.left) / rect.width) * 2 - 1;
-      targetY = ((e.clientY - rect.top) / rect.height) * 2 - 1;
-    });
+      stage.addEventListener("mousemove", (e) => {
+        const rect = stage.getBoundingClientRect();
+        targetX = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+        targetY = ((e.clientY - rect.top) / rect.height) * 2 - 1;
+      });
 
-    stage.addEventListener("mouseleave", () => {
-      targetX = 0;
-      targetY = 0;
-    });
+      stage.addEventListener("mouseleave", () => {
+        targetX = 0;
+        targetY = 0;
+      });
 
-function updateCameraParallax() {
-  // Smooth camera inertia
-  currentX += (targetX - currentX) * 0.08;
-  currentY += (targetY - currentY) * 0.08;
+      function updateCameraParallax() {
+        currentX += (targetX - currentX) * 0.08;
+        currentY += (targetY - currentY) * 0.08;
 
-  // Layer 0 (Background): follows mouse direction (+)
-  bgLayer.style.transform =
-    `scale(1.08) translate3d(${currentX * 12}px, ${currentY * 8}px, 0)`;
+        // Layer 0 (Background): follows mouse direction (+)
+        bgLayer.style.transform =
+          `scale(1.08) translate3d(${currentX * 12}px, ${currentY * 8}px, 0)`;
 
-  // Layer 1 (Sylus): moves away from mouse direction (-)
-  fgLayer.style.transform =
-    `scale(1.05) translate3d(${currentX * -22}px, ${currentY * -12}px, 0)`;
+        // Layer 1 (Sylus): moves away from mouse direction (-)
+        fgLayer.style.transform =
+          `scale(1.05) translate3d(${currentX * -22}px, ${currentY * -12}px, 0)`;
 
-  // Layer 2 (Words): moves further away from mouse direction (-) for deeper foreground pop
-  wordsLayer.style.transform =
-    `translate3d(${currentX * -34}px, ${currentY * -16}px, 0)`;
+        // Layer 2 (Words): moves further away from mouse direction (-) for deeper foreground pop
+        wordsLayer.style.transform =
+          `translate3d(${currentX * -34}px, ${currentY * -16}px, 0)`;
 
-  requestAnimationFrame(updateCameraParallax);
-}
-    updateCameraParallax();
-  }
-</script>
+        requestAnimationFrame(updateCameraParallax);
+      }
+
+      updateCameraParallax();
+    }
+  </script>
 </body>
 </html>
