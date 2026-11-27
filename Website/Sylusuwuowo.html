@@ -150,37 +150,52 @@
     animateParticles();
   </script>
 
-  <script>
-    const stage = document.getElementById("sylusWallpaperStage");
-    const bgLayer = document.getElementById("wallpaperBg");
-    const fgLayer = document.getElementById("wallpaperFg");
-    const wordsLayer = document.getElementById("wallpaperWords");
+<script>
+  const stage = document.getElementById("sylusWallpaperStage");
+  const bgLayer = document.getElementById("wallpaperBg");
+  const fgLayer = document.getElementById("wallpaperFg");
+  const wordsLayer = document.getElementById("wallpaperWords");
 
-    if (stage && bgLayer && fgLayer && wordsLayer) {
-      stage.addEventListener("mousemove", (e) => {
-        const rect = stage.getBoundingClientRect();
-        const normX = ((e.clientX - rect.left) / rect.width) * 2 - 1;
-        const normY = ((e.clientY - rect.top) / rect.height) * 2 - 1;
+  if (stage && bgLayer && fgLayer && wordsLayer) {
+    let targetX = 0;
+    let targetY = 0;
+    let currentX = 0;
+    let currentY = 0;
 
-        // Layer 0: Background shifts gently
-        bgLayer.style.transform =
-          `scale(1.1) translate3d(${normX * -12}px, ${normY * -8}px, -40px)`;
+    stage.addEventListener("mousemove", (e) => {
+      const rect = stage.getBoundingClientRect();
+      // -1 (left/top) to +1 (right/bottom)
+      targetX = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+      targetY = ((e.clientY - rect.top) / rect.height) * 2 - 1;
+    });
 
-        // Layer 1: Sylus shifts more + subtle 3D depth angle
-        fgLayer.style.transform =
-          `scale(1.05) translate3d(${normX * 26}px, ${normY * 14}px, 45px) rotateY(${normX * 5}deg) rotateX(${normY * -3}deg)`;
+    stage.addEventListener("mouseleave", () => {
+      targetX = 0;
+      targetY = 0;
+    });
 
-        // Layer 2: Right-side text sits on top layer with parallax
-        wordsLayer.style.transform =
-          `translate3d(${normX * -16}px, ${normY * -10}px, 85px)`;
-      });
+    function updateCameraParallax() {
+      // Smooth camera inertia (lower = floatier, higher = snappier)
+      currentX += (targetX - currentX) * 0.08;
+      currentY += (targetY - currentY) * 0.08;
 
-      stage.addEventListener("mouseleave", () => {
-        bgLayer.style.transform = "scale(1.1) translate3d(0, 0, -40px)";
-        fgLayer.style.transform = "scale(1.05) translate3d(0, 0, 45px) rotateY(0deg) rotateX(0deg)";
-        wordsLayer.style.transform = "translate3d(0, 0, 85px)";
-      });
+      // Layer 0 (Far background): slowest drift in cursor direction
+      bgLayer.style.transform =
+        `scale(1.08) translate3d(${currentX * 8}px, ${currentY * 6}px, 0)`;
+
+      // Layer 1 (Sylus): medium drift, no rotating/staring
+      fgLayer.style.transform =
+        `scale(1.05) translate3d(${currentX * 20}px, ${currentY * 12}px, 0)`;
+
+      // Layer 2 (Words): closest layer, glides slightly faster
+      wordsLayer.style.transform =
+        `translate3d(${currentX * 32}px, ${currentY * 16}px, 0)`;
+
+      requestAnimationFrame(updateCameraParallax);
     }
-  </script>
+
+    updateCameraParallax();
+  }
+</script>
 </body>
 </html>
