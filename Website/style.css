@@ -1,352 +1,186 @@
-/* Global page styling */
-* {
-  box-sizing: border-box;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Character set and responsive viewport setup -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>I wonder what website is this</title>
+  <!-- Link external stylesheet -->
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
 
-#particle-canvas {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 999;
-}
+  <style>
+    h2 {
+      border-left: 5px solid #3a0909;
+      padding-left: 10px;
+      color: #feffff;
+      font-family: 'Dancing Script', cursive;
+    }
+  </style>
+</head>
 
-body {
-  font-family: Arial, sans-serif;
-  margin: 24px;
-  background-color: #070707;
-  color: #fcf9f9;
-  line-height: 1.5;
-}
+<body>
+  <canvas id="particle-canvas"></canvas>
 
-header {
-  background-image: url("background.gif");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  color: white;
-  text-align: center;
-  padding: 60px 20px;
-  border: 1px solid #0f0202;
-}
+  <header>
+    <h1>Welcome to my hiding spot :3 !!</h1>
+    <p>A place full of <strong>RANDOMNESS OWO</strong> !!</p>
+  </header>
 
-h1 {
-  text-align: center;
-  font-family: 'Dancing Script', cursive;
-}
+  <br>
+  <h2>Top 5 husbando list</h2>
 
-h2, h3 {
-  color: #f7f7f8;
-  margin-top: 0;
-}
+  <section class="husbando">
+    <div class="list">
+      <ol>
+        <li>
+          <h3>Sylus the mafia</h3>
+          <p>eh who else if it isnt the white haired villain from love and deepspace</p>
 
-img {
-  max-width: 320px;
-  height: auto;
-  border-radius: 6px;
-  margin: 6px 8px 6px 0;
-}
+          <div class="biodata-row">
+            <img id="sylus1" src="sylus.jpg" alt="sylus">
+            <div class="biodata-text">
+              <h3>Biodata</h3>
+              <ul>
+                <li><strong>Full Name:</strong> Sylus (Chinese: 秦彻 / Qin Che)</li>
+                <li><strong>Age:</strong> 28</li>
+                <li><strong>Birthday:</strong> April 18</li>
+                <li><strong>Zodiac Sign:</strong> Aries</li>
+                <li><strong>Height:</strong> 6'2" (190 cm)</li>
+                <li><strong>Appearance:</strong> Silver/white hair, bright red eyes (right eye can glow red when using Evol), and a muscular build.</li>
+                <li><strong>Role / Occupation:</strong> Fruit Seller :'3</li>
+              </ul>
+            </div>
+          </div>
 
-section {
-  background-image: url("sylusback.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-color: #0f0505;
-  border: 1px solid #851313;
-  border-radius: 12px;
-  padding: 20px 24px;
-  margin-top: 24px;
-}
+          <br>
 
-.biodata-row {
-  display: flex;
-  align-items: flex-start;
-  gap: 24px;
-  margin-top: 10px;
-}
+          <div class="biodata-row2">
+            <div class="biodata-text">
+              <h3>Why him?</h3>
+              <p>"Of course my kitten going<br>to pick me for this list~"</p>
+              <p>- Sylus</p>
+              <!-- <img id="sylus3" src="sylus3.gif" alt="sylus3"> -->
+            </div>
+            <img id="sylus2" src="Sylus Meme.jpg" alt="sylus2">
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
 
-#sylus1 {
-  width: 240px;
-  height: auto;
-  border-radius: 8px;
-  flex-shrink: 0;
-}
+  <section class="vid">
+    <div class="video-box">
+      <iframe
+        src="https://www.youtube.com/embed/d2GgqdFVGpA"
+        title="Heartbeats Ablaze | Sylus Love and Deepspace"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </div>
+  </section>
 
-.biodata-text p {
-  margin-top: 0;
-  font-weight: bold;
-}
+  <!-- Layer 0: Background | Layer 1: Sylus Cutout | Layer 2: Right-side Words -->
+  <section class="sylus-3d-section" id="sylusWallpaperStage">
+    <img src="sylus-bg.jpg" alt="Background" class="wallpaper-bg layer-0" id="wallpaperBg">
+    <img src="sylus-cutout.png" alt="Sylus" class="wallpaper-fg layer-1" id="wallpaperFg">
 
-.biodata-text ul {
-  padding-left: 20px;
-  line-height: 1.6;
-}
+    <div class="wallpaper-words layer-2" id="wallpaperWords">
+      <span class="float-tag">HEARTBEATS ABLAZE</span>
+      <h2 class="float-title">Sylus</h2>
+      <p class="float-quote">“Taking the lead really is your specialty.”</p>
+    </div>
+  </section>
 
-.sylus2 {
-  width: 240px;
-  height: auto;
-  border-radius: 8px;
-  flex-shrink: 0;
-  margin-left: auto;
-}
+  <script>
+    const canvas = document.getElementById("particle-canvas");
+    const ctx = canvas.getContext("2d");
 
-.sylus3 {
-  width: 100%;
-  max-width: 300px;
-  height: auto;
-  border-radius: 8px;
-}
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener("resize", resizeCanvas);
 
-.biodata-row2 {
-  background: linear-gradient(145deg, #140606, #0b0404);
-  border: 1px solid rgba(133, 19, 19, 0.75);
-  border-radius: 14px;
-  padding: 22px 24px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 28px;
-  margin-top: 16px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.55);
-}
+    const particles = [];
+    const particleCount = 60;
+    const colors = ["#ff3b3b", "#851313", "#ffffff"];
 
-.biodata-row2 .biodata-text {
-  flex: 1;
-  min-width: 0;
-}
+    for (let i = 0; i < particleCount; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        radius: Math.random() * 2.5 + 1,
+        speedX: (Math.random() - 0.5) * 0.6,
+        speedY: -(Math.random() * 0.8 + 0.2),
+        color: colors[Math.floor(Math.random() * colors.length)],
+        alpha: Math.random() * 0.7 + 0.3
+      });
+    }
 
-.biodata-row2 .biodata-text p {
-  text-align: center;
-  margin-bottom: 14px;
-  line-height: 1.6;
-}
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-.biodata-row2 #sylus2,
-.biodata-row2 .sylus2 {
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.65);
-  margin: 0;
-}
+      for (const p of particles) {
+        p.x += p.speedX;
+        p.y += p.speedY;
 
-.biodata-row2 .biodata-text h3 {
-  text-align: center;
-}
+        if (p.y < 0) p.y = canvas.height;
+        if (p.y > canvas.height) p.y = 0;
+        if (p.x < 0) p.x = canvas.width;
+        if (p.x > canvas.width) p.x = 0;
 
-.biodata-row .biodata-text p,
-.biodata-row2 .biodata-text p {
-  text-align: center;
-  font-family: 'Dancing Script', cursive;
-  font-size: 50px;
-}
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = p.color;
+        ctx.globalAlpha = p.alpha;
+        ctx.shadowBlur = 8;
+        ctx.shadowColor = p.color;
+        ctx.fill();
+      }
 
-.vid {
-  background-color: #0f0505;
-  border: 1px solid #851313;
-  border-radius: 12px;
-  padding: 20px 24px;
-  margin-top: 24px;
-}
+      ctx.globalAlpha = 1;
+      requestAnimationFrame(animateParticles);
+    }
 
-.video-box {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  border-radius: 10px;
-  overflow: hidden;
-}
+    animateParticles();
+  </script>
 
-.video-box iframe {
-  width: 100%;
-  height: 100%;
-  border: 0;
-}
+  <script>
+    const stage = document.getElementById("sylusWallpaperStage");
+    const bgLayer = document.getElementById("wallpaperBg");
+    const fgLayer = document.getElementById("wallpaperFg");
+    const wordsLayer = document.getElementById("wallpaperWords");
 
-/* Bigger Live-Wallpaper 3D Section (1080p tuned) */
-.sylus-3d-section {
-  position: relative;
-  width: 100%;
-  min-height: 650px;
-  border: 1px solid #851313;
-  border-radius: 16px;
-  margin-top: 24px;
-  padding: 40px 56px;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 32px;
-  perspective: 1200px;
-  background: radial-gradient(circle at 25% 50%, #2a1208 0%, #0b0404 75%);
-  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.88), inset 0 0 60px rgba(133, 19, 19, 0.25);
-}
+    if (stage && bgLayer && fgLayer && wordsLayer) {
+      stage.addEventListener("mousemove", (e) => {
+        const rect = stage.getBoundingClientRect();
+        const normX = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+        const normY = ((e.clientY - rect.top) / rect.height) * 2 - 1;
 
-/* Adjust gradient so text has a soft dark backdrop where it sits */
-.sylus-3d-section::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    90deg,
-    rgba(10, 4, 4, 0.02) 0%,
-    rgba(10, 4, 4, 0.45) 42%,
-    rgba(10, 4, 4, 0.88) 68%,
-    rgba(10, 4, 4, 0.95) 100%
-  );
-  z-index: 2;
-  pointer-events: none;
-}
+        // Layer 0: Background shifts gently
+        bgLayer.style.transform =
+          `scale(1.1) translate3d(${normX * -12}px, ${normY * -8}px, -40px)`;
 
-/* Layer 0: Background fills the entire section */
-.sylus-3d-section .wallpaper-bg {
-  position: absolute;
-  inset: 0;
-  width: 100% !important;
-  height: 100% !important;
-  max-width: none !important;
-  max-height: none !important;
-  margin: 0 !important;
-  border-radius: 0 !important;
-  object-fit: cover;
-  object-position: center;
-  filter: brightness(0.88) contrast(1.08);
-  transform: scale(1.1) translate3d(0, 0, -40px);
-  transition: transform 0.14s ease-out;
-  z-index: 0;
-  pointer-events: none;
-}
+        // Layer 1: Sylus shifts more + subtle 3D depth angle
+        fgLayer.style.transform =
+          `scale(1.05) translate3d(${normX * 26}px, ${normY * 14}px, 45px) rotateY(${normX * 5}deg) rotateX(${normY * -3}deg)`;
 
-/* Layer 1: Sylus cutout — bigger, shifted slightly right, with headroom */
-.sylus-3d-section .wallpaper-fg {
-  position: absolute;
-  bottom: -18px;
-  left: 10%;
-  height: 102% !important;
-  width: auto !important;
-  max-width: none !important;
-  max-height: none !important;
-  margin: 0 !important;
-  border-radius: 0 !important;
-  object-fit: contain;
-  object-position: bottom center;
-  transform-origin: bottom center;
-  transform: scale(1.06) translate3d(0, 0, 45px);
-  transition: transform 0.1s ease-out;
-  filter: drop-shadow(0 20px 34px rgba(0, 0, 0, 0.96));
-  z-index: 1;
-  pointer-events: none;
-}
+        // Layer 2: Right-side text sits on top layer with parallax
+        wordsLayer.style.transform =
+          `translate3d(${normX * -16}px, ${normY * -10}px, 85px)`;
+      });
 
-/* Move Layer 2 words a lot further left */
-.sylus-3d-section .wallpaper-words {
-  position: relative;
-  z-index: 3;
-  flex-shrink: 0;
-  width: 390px;
-  max-width: 100%;
-  margin-left: auto;
-  margin-right: 14%; /* pulls the text block noticeably left from the right edge */
-  text-align: right;
-  transform: translate3d(0, 0, 85px);
-  transition: transform 0.1s ease-out;
-}
-
-.sylus-3d-section .float-tag {
-  display: inline-block;
-  font-size: 0.78rem;
-  font-weight: bold;
-  letter-spacing: 3px;
-  color: #ff6b6b;
-  text-transform: uppercase;
-  margin-bottom: 8px;
-  white-space: nowrap;
-}
-
-.sylus-3d-section .float-title {
-  font-family: 'Dancing Script', cursive;
-  font-size: 4rem;
-  line-height: 1.05;
-  color: #ffffff;
-  text-shadow: 0 0 24px rgba(255, 50, 50, 0.75), 0 4px 16px rgba(0, 0, 0, 0.95);
-  margin: 0 0 12px 0;
-}
-
-.sylus-3d-section .float-quote {
-  font-size: 1.02rem;
-  line-height: 1.55;
-  color: #f5eaea;
-  margin: 0;
-  text-shadow: 0 2px 12px rgba(0, 0, 0, 1);
-}
-
-/* Mobile / phone layout tweaks */
-@media (max-width: 768px) {
-  body {
-    margin: 12px;
-  }
-
-  header {
-    padding: 40px 14px;
-  }
-
-  section {
-    padding: 16px;
-    margin-top: 16px;
-  }
-
-  .biodata-row,
-  .biodata-row2 {
-    flex-direction: column;
-    align-items: center;
-    gap: 16px;
-    padding: 16px;
-  }
-
-  #sylus1,
-  #sylus2,
-  .sylus2,
-  .sylus3,
-  .biodata-text img {
-    width: 100%;
-    max-width: 280px;
-    margin-left: 0;
-  }
-
-  .biodata-text {
-    width: 100%;
-  }
-
-  .biodata-text ul {
-    text-align: left;
-    padding-left: 18px;
-  }
-
-  .sylus-3d-section {
-    min-height: 560px;
-    padding: 24px 20px;
-    align-items: flex-end;
-    justify-content: center;
-  }
-
-  .sylus-3d-section .wallpaper-fg {
-    left: 50%;
-    height: 64% !important;
-    transform: translateX(-50%) scale(1.04) translate3d(0, 0, 30px);
-  }
-
-  .sylus-3d-section .wallpaper-words {
-    max-width: 100%;
-    text-align: center;
-    background: rgba(12, 4, 4, 0.82);
-    padding: 16px 20px;
-    border: 1px solid rgba(133, 19, 19, 0.55);
-    border-radius: 12px;
-    transform: translate3d(0, 0, 50px);
-  }
-
-  .sylus-3d-section .float-title {
-    font-size: 3.1rem;
-  }
-}
+      stage.addEventListener("mouseleave", () => {
+        bgLayer.style.transform = "scale(1.1) translate3d(0, 0, -40px)";
+        fgLayer.style.transform = "scale(1.05) translate3d(0, 0, 45px) rotateY(0deg) rotateX(0deg)";
+        wordsLayer.style.transform = "translate3d(0, 0, 85px)";
+      });
+    }
+  </script>
+</body>
+</html>
