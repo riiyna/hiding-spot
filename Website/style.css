@@ -1,4 +1,7 @@
 /* Global page styling */
+* {
+  box-sizing: border-box;
+}
 
 #particle-canvas {
   position: fixed;
@@ -7,18 +10,18 @@
   width: 100%;
   height: 100%;
   pointer-events: none;
-  z-index: 999; /* change to 999 if you want particles floating in front of boxes */
+  z-index: 999;
 }
+
 body {
   font-family: Arial, sans-serif;
   margin: 24px;
   background-color: #070707;
   color: #fcf9f9;
   line-height: 1.5;
-
 }
 
-header{
+header {
   background-image: url("background.gif");
   background-size: cover;
   background-position: center;
@@ -27,9 +30,7 @@ header{
   text-align: center;
   padding: 60px 20px;
   border: 1px solid #0f0202;
-
 }
-
 
 h1 {
   text-align: center;
@@ -48,18 +49,30 @@ img {
   margin: 6px 8px 6px 0;
 }
 
+section {
+  background-image: url("sylusback.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #0f0505;
+  border: 1px solid #851313;
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin-top: 24px;
+}
+
 .biodata-row {
   display: flex;
-  align-items: flex-start; /* lines up the top of the text with the top of the photo */
-  gap: 24px;               /* space between the photo and the biodata */
+  align-items: flex-start;
+  gap: 24px;
   margin-top: 10px;
 }
 
 #sylus1 {
-  width: 240px;            /* adjust photo width as you like */
+  width: 240px;
   height: auto;
   border-radius: 8px;
-  flex-shrink: 0;          /* stops the image from shrinking */
+  flex-shrink: 0;
 }
 
 .biodata-text p {
@@ -72,41 +85,28 @@ img {
   line-height: 1.6;
 }
 
-section {
-    background-image: url("sylusback.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-color: #0f0505;
-    border: 1px solid #851313;
-    border-radius: 12px;
-    padding:20px 24px;
-    margin-top: 24px;
-}
-
 .sylus2 {
-    width: 240px;
-    height: auto;
-    border-radius: 8px;
-    flex-shrink: 0;
-    margin-left: auto;
+  width: 240px;
+  height: auto;
+  border-radius: 8px;
+  flex-shrink: 0;
+  margin-left: auto;
 }
 
 .sylus3 {
-    width: 100%;
+  width: 100%;
   max-width: 300px;
-    height: auto;
-    border-radius: 8px;
-
+  height: auto;
+  border-radius: 8px;
 }
 
 .biodata-row2 {
   background: linear-gradient(145deg, #140606, #0b0404);
-  border: 1px solid rgba(133, 19, 19, 0.75); /* softer crimson border instead of harsh white */
+  border: 1px solid rgba(133, 19, 19, 0.75);
   border-radius: 14px;
-  padding: 22px 24px;                        /* breathing room inside the box */
+  padding: 22px 24px;
   display: flex;
-  align-items: center;                       /* keeps the left & right sides balanced */
+  align-items: center;
   justify-content: space-between;
   gap: 28px;
   margin-top: 16px;
@@ -119,21 +119,20 @@ section {
 }
 
 .biodata-row2 .biodata-text p {
-    text-align: center;
+  text-align: center;
   margin-bottom: 14px;
   line-height: 1.6;
 }
 
 .biodata-row2 #sylus2,
 .biodata-row2 .sylus2 {
-    text-align: center;
   border: 1px solid rgba(255, 255, 255, 0.14);
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.65);
   margin: 0;
 }
 
 .biodata-row2 .biodata-text h3 {
-    text-align: center;
+  text-align: center;
 }
 
 .biodata-row .biodata-text p,
@@ -165,33 +164,34 @@ section {
   border: 0;
 }
 
-/* Full-width 3D Wallpaper Banner */
+/* Bigger Live-Wallpaper 3D Section */
 .sylus-3d-section {
   position: relative;
   width: 100%;
-  height: 520px; /* nice tall banner height */
+  min-height: 620px;
   border: 1px solid #851313;
   border-radius: 16px;
   margin-top: 24px;
-  padding: 0 64px;
+  padding: 48px 72px;
   overflow: hidden;
   display: flex;
   align-items: center;
-  justify-content: flex-end; /* pushes text to the right */
+  justify-content: flex-end;
+  perspective: 1200px;
   background: radial-gradient(circle at 25% 50%, #2a1208 0%, #0b0404 75%);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.85), inset 0 0 60px rgba(133, 19, 19, 0.25);
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.88), inset 0 0 60px rgba(133, 19, 19, 0.25);
 }
 
-/* Dark cinematic gradient fade so right side blends smoothly */
+/* Dark cinematic gradient fade so right-side text stays readable */
 .sylus-3d-section::after {
   content: "";
   position: absolute;
   inset: 0;
   background: linear-gradient(
     90deg,
-    rgba(10, 4, 4, 0.05) 0%,
-    rgba(10, 4, 4, 0.35) 45%,
-    rgba(10, 4, 4, 0.88) 78%,
+    rgba(10, 4, 4, 0.04) 0%,
+    rgba(10, 4, 4, 0.32) 48%,
+    rgba(10, 4, 4, 0.86) 76%,
     rgba(10, 4, 4, 0.96) 100%
   );
   z-index: 2;
@@ -201,8 +201,7 @@ section {
 /* Layer 0: Background fills the entire section */
 .sylus-3d-section .wallpaper-bg {
   position: absolute;
-  top: 0;
-  left: 0;
+  inset: 0;
   width: 100% !important;
   height: 100% !important;
   max-width: none !important;
@@ -211,45 +210,45 @@ section {
   border-radius: 0 !important;
   object-fit: cover;
   object-position: center;
-  filter: brightness(0.85) contrast(1.08);
-  transform: scale(1.08) translate3d(0, 0, 0);
-  transition: transform 0.18s ease-out;
+  filter: brightness(0.88) contrast(1.08);
+  transform: scale(1.1) translate3d(0, 0, -40px);
+  transition: transform 0.14s ease-out;
   z-index: 0;
   pointer-events: none;
 }
 
-/* Layer 1: Sylus cutout anchored cleanly on the left */
+/* Layer 1: Sylus cutout with 3D depth */
 .sylus-3d-section .wallpaper-fg {
   position: absolute;
   bottom: 0;
-  left: 8%;
-  height: 92% !important;
+  left: 5%;
+  height: 95% !important;
   width: auto !important;
   max-width: none !important;
   max-height: none !important;
   margin: 0 !important;
   border-radius: 0 !important;
   object-fit: contain;
-  transform: scale(1.03) translate3d(0, 0, 0);
-  transition: transform 0.12s ease-out;
-  filter: drop-shadow(0 18px 30px rgba(0, 0, 0, 0.95));
+  transform: scale(1.05) translate3d(0, 0, 45px);
+  transition: transform 0.1s ease-out;
+  filter: drop-shadow(0 20px 34px rgba(0, 0, 0, 0.96));
   z-index: 1;
   pointer-events: none;
 }
 
-/* Floating Words on the Right */
+/* Layer 2: Right-side words */
 .sylus-3d-section .wallpaper-words {
   position: relative;
   z-index: 3;
-  max-width: 440px;
+  max-width: 460px;
   text-align: right;
-  animation: gentleFloat 4s ease-in-out infinite;
-  transition: transform 0.12s ease-out;
+  transform: translate3d(0, 0, 85px);
+  transition: transform 0.1s ease-out;
 }
 
 .sylus-3d-section .float-tag {
   display: inline-block;
-  font-size: 0.8rem;
+  font-size: 0.82rem;
   font-weight: bold;
   letter-spacing: 4px;
   color: #ff6b6b;
@@ -259,65 +258,19 @@ section {
 
 .sylus-3d-section .float-title {
   font-family: 'Dancing Script', cursive;
-  font-size: 4.2rem;
-  line-height: 1;
+  font-size: 4.5rem;
+  line-height: 1.05;
   color: #ffffff;
-  text-shadow: 0 0 22px rgba(255, 50, 50, 0.75), 0 4px 14px rgba(0, 0, 0, 0.95);
+  text-shadow: 0 0 24px rgba(255, 50, 50, 0.75), 0 4px 16px rgba(0, 0, 0, 0.95);
   margin: 0 0 14px 0;
 }
 
 .sylus-3d-section .float-quote {
-  font-size: 1.05rem;
+  font-size: 1.08rem;
   line-height: 1.6;
   color: #f5eaea;
   margin: 0;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 1);
-}
-
-@keyframes gentleFloat {
-  0%, 100% {
-    margin-top: 0px;
-  }
-  50% {
-    margin-top: -12px;
-  }
-}
-
-/* Mobile adjustments */
-@media (max-width: 768px) {
-  .sylus-3d-section {
-    height: 540px;
-    padding: 24px 20px;
-    align-items: flex-end;
-    justify-content: center;
-  }
-
-  .sylus-3d-section .wallpaper-fg {
-    left: 50%;
-    height: 64% !important;
-    transform: translateX(-50%) scale(1.03);
-  }
-
-  .sylus-3d-section .wallpaper-words {
-    max-width: 100%;
-    text-align: center;
-    background: rgba(12, 4, 4, 0.78);
-    padding: 16px 20px;
-    border: 1px solid rgba(133, 19, 19, 0.5);
-    border-radius: 12px;
-  }
-
-  .sylus-3d-section .float-title {
-    font-size: 3rem;
-  }
-}
-
-/* Mobile sizing */
-@media (max-width: 768px) {
-  .card-3d {
-    width: 280px;
-    height: 390px;
-  }
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 1);
 }
 
 /* Mobile / phone layout tweaks */
@@ -335,7 +288,6 @@ section {
     margin-top: 16px;
   }
 
-  /* Stack left/right rows vertically on phones */
   .biodata-row,
   .biodata-row2 {
     flex-direction: column;
@@ -344,7 +296,6 @@ section {
     padding: 16px;
   }
 
-  /* Make images fit comfortably inside narrow phone screens */
   #sylus1,
   #sylus2,
   .sylus2,
@@ -355,7 +306,6 @@ section {
     margin-left: 0;
   }
 
-  /* Keep biodata bullets readable on the left while centering paragraphs */
   .biodata-text {
     width: 100%;
   }
@@ -363,5 +313,32 @@ section {
   .biodata-text ul {
     text-align: left;
     padding-left: 18px;
+  }
+
+  .sylus-3d-section {
+    min-height: 560px;
+    padding: 24px 20px;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .sylus-3d-section .wallpaper-fg {
+    left: 50%;
+    height: 64% !important;
+    transform: translateX(-50%) scale(1.04) translate3d(0, 0, 30px);
+  }
+
+  .sylus-3d-section .wallpaper-words {
+    max-width: 100%;
+    text-align: center;
+    background: rgba(12, 4, 4, 0.82);
+    padding: 16px 20px;
+    border: 1px solid rgba(133, 19, 19, 0.55);
+    border-radius: 12px;
+    transform: translate3d(0, 0, 50px);
+  }
+
+  .sylus-3d-section .float-title {
+    font-size: 3.1rem;
   }
 }
